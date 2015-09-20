@@ -1,0 +1,251 @@
+/*CSS ONLY SUPPORTS MULTI-LINE COMMENTS*/
+//BUT LESS SUPPORTS ONE-LINE COMMENTS - THEY ARE NOT GOING TO BE PRESENT ON THE CSS FILE
+//LESS VARIABLE
+@bg-base: #eee;
+@font-base: 1 em Helvetica, Arial, sans-serif;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: @bg-base;
+}
+
+//LESS NESTING
+header{
+  padding: 10px;
+  background-color: #333;
+
+  > h1 {
+    background-color: @bg-base;
+  }
+
+  p {
+    color: #fff;
+    font: @font-base;
+  }
+}
+
+a {
+    color: red;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+}
+// se sustituye el & por toda la jerarquia de antecesores
+.boton {
+  &-ok {
+    color: green;
+  }
+
+  &-error {
+    color: red;
+  }
+}
+
+.clasePadre {
+  .claseHija {
+    & > h1 {
+      color: blue;
+    }
+  }
+}
+
+.calsePadre {
+  .claseHija {
+    .claseAbuelo & {
+      color: red;
+    }
+  }
+}
+// APLICA LA REGLA DEL ANTECESOR A TODAS LAS COMBINACIONES POSIBLES DE ESTOS SELECTORES
+div, p, span {
+  & + & {
+    color: white;
+  }
+}
+
+//USO DE VARIABLES -  EXXPLICACION MAS PROFUNDA
+
+@div-name: test-img;
+@fsize: font-size;
+@fweight: font-weight;
+@saludo: 'hola';
+@hola: 'hola LESS';
+//se pueden usar las variables para construir elementos
+//interpolacion de la variable
+
+#@{div-name} {
+  @bg-base: #fc0;
+  height: 200px;
+  color: #ff;
+  @{fsize}: 24px;
+  @{fweight}: bold;
+  background-color: @bg-base;
+
+}
+
+#@{div-name}-2 {
+  color: #333;
+  background-color: @bg-base;
+
+  &:after{
+    content: @@saludo; //variables de variables
+  }
+}
+//ambito de las variables.
+//siempre  busca la variable en su regla si no la encuentra sube un nivel.
+//sigue subiendo hasta el final de la jerarquia da un error.
+
+//OPERACIONES Y FUNCIONES PREDEFINIDAS
+
+@ancho: 100%;
+@border-base: 1px;
+@border-extra: 3;
+@bg-medio: @bg-base / 2;
+@bg-alternativo: @bg-base - #15a;
+
+.column-2 {
+  float: left;
+  box-sizing: border-box;
+  width: @ancho/2;
+  padding: 10px;
+  border: @border-base solid #3333;
+  background-color: @bg-alternativo;
+}
+
+.column-4 {
+  float: left;
+  box-sizing: border-box;
+  width: @ancho/4;
+  padding: 10px;
+  border: @border-base solid #3333;
+  background-color: spin(saturate(@bg-alternativo,40%),10);
+}
+
+.clearfix {
+  clear: both;
+}
+
+.special-column {
+  border-width: @border-base + @border-extra;
+}
+
+//extend
+//para vincular un estilo a otro
+//no se puede colocar otro pseudo selector como :hover detras de un extend
+//el extend siempre tiene que ser el ultimo pseudoselector
+//puedo concatenar extend, para extender de ms de un selectorA
+//esto depende de lo que queremos hacer
+
+.selectorA {
+  color: #aaa;
+}
+
+.selectorA > a{
+  text-decoration: none;
+}
+
+.selectorA > a:hover {
+  text-decoration: underline;
+}
+
+.selectorB {
+  //&:extend(.selectorA);
+  border: : 1px solid #fff;
+}
+
+// tiene que ser una coincidencia exacta
+.selectorC:extend(.selectorA, .selectorB) {
+  background-color: #fc0;
+}
+//en el caso de aplicar a todas las variantes de un selector
+.selectorD:extend(.selectorA all, .selectorB) {
+  background-color: #ccc;
+}
+//al igual qeu las variables se aplican en funcion de los ambitos
+//sentido en las meddias queries
+//no detectas duplicaciones
+//reultilizan codigo
+//que un selector se aproveche de las prop que ya tiene otro elemento
+
+//mixin reproducci un codigo en todos los selectores que lo utilizan
+
+//MERGE
+//es la capacidad de unir varios valores para una misma propiedad en un mismo selector
+@rutaBaseImg: '../img/';
+.alert {
+  background+:url('@{rutaBaseImg}bg/alternativo');
+  background-repeat+: no-repeat;
+  background-position+: center;
+}
+//en css prevalece la segunda definicion del background por sobre la primera
+//el simbolo + le avisa a less que tiene que concatenar los valores para las propiedades
+.alert-ok {
+  //esto es lo mismo que poner
+  //.alert;
+  background+:url('@{rutaBaseImg}bg/alternativo');
+  background-repeat+: no-repeat;
+  background-position+: center;
+
+  background+:url('@{rutaBaseImg}bg/alternativo');
+  background-repeat+: no-repeat;
+  background-position+: left top;
+}
+
+
+//IMPORT FILES
+@import "base.less";// coloca el selector al final
+.extendido:extend(.base){
+  border: 1px solid #ccc;
+}
+
+//esto solo  esta pensado para .less y no para .css
+@import (reference) "base.less";
+.extendido:extend(.base){
+  border: 1px solid #ccc;
+}
+
+@import "base.css"; //coloca el import al principo del css
+@import (inline) "base.css"; //incluye el contenido del archivo
+//si se pone un inline en un archivo .less el contenido no se parsea y se coloca como esta
+@import (less) "base.css";
+//Fuerza a que se comporte como un archivo less por mas de que sea css
+//tb se puede hacer viceverza
+@import (once) "base.less";//fuerza a que se importe una sola vez el archivo
+@import (multiple) "base.less";//viceverza del anterior
+
+
+//CONDITIONALS
+& when (@saludo = 'hola') {
+  .despedida {
+    color: white;
+  }
+}
+
+& when ( isnumber(@saludo) = false) {
+  .despedida2 {
+    color: blue;
+  }
+}
+
+//LOOPS
+.bucle(@i) when (@i > 0) {
+  .bucle((@i - 1));
+  width: (100px/@i);
+}
+
+section {
+  .bucle(3);
+}
+
+.generate-columns(@n, @i:1) when (@i =< @n) {
+  .col-@{i} {
+    width: (@i*100%/@n);
+  }
+  .generate-columns(@n,(@i + 1));
+}
+.generate-columns(4);
