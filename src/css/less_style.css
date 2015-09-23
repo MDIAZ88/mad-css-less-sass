@@ -160,3 +160,56 @@ section {
 .col-4 {
   width: 100%;
 }
+.aviso-ok {
+  text-align: center;
+  background-color: #aaa;
+  color: green;
+}
+.aviso-ok:hover {
+  bacground-color: #eee;
+}
+.aviso-error {
+  text-align: center;
+  background-color: #aaa;
+  color: red;
+}
+.aviso-error:hover {
+  bacground-color: #eee;
+}
+article {
+  padding: 3.33333333px;
+}
+article {
+  padding: 3.33333333px;
+}
+article {
+  padding: 1.33333333px;
+}
+article {
+  border: 10px 5px;
+  padding: 3.33333333px;
+}
+p.especial {
+  background-color: #ffd633;
+  border-color: #ffcc00;
+}
+header {
+  color: #333;
+}
+html.old header {
+  background-color: blue;
+}
+footer {
+  color: #333;
+}
+html.old footer {
+  border: 1px solid white;
+  background-color: red;
+}
+.elemento1 {
+  text-align: left;
+}
+.elemento2 {
+  text-align: left;
+  background-color: #ffcc00;
+}

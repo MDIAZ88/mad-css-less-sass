@@ -249,3 +249,133 @@ section {
   .generate-columns(@n,(@i + 1));
 }
 .generate-columns(4);
+
+//MIXIN
+//conbinar propiedades de diferentes estilos
+
+//si queremos que la clase .aviso no aparesca en los resultados css
+//agregar ()
+.aviso() {
+  text-align: center;
+  background-color: #aaa;
+  // a diferencia del extend
+  //los mixin admiten la referencia al padre
+  &:hover {
+    bacground-color: #eee;
+  }
+}
+.aviso-ok {
+  .aviso();
+  color: green;
+}
+
+.aviso-error {
+    .aviso(); //llamada en forma de funcion
+    color: red;
+}
+//si existe una gran cantidad de codigo  que existe entre avisos  se puede extender o crear un mixin
+
+//mixin como funciones y con parametros
+.miCalculo()
+{
+  @ancho: 10px;
+  @alto: 5px;
+  @resultado: @ancho*@alto/15;
+}
+
+article {
+  .miCalculo();
+  padding: @resultado;
+}
+//paso de parametros
+.miCalculo2(@ancho, @alto)
+{
+  @resultado: @ancho*@alto/15;
+}
+
+article {
+  .miCalculo2(10px, 5px);
+  padding: @resultado;
+}
+//los parametros pueden tener valores por defectos
+.miCalculo3(@ancho: 10px, @alto: 2px)
+{
+  @resultado: @ancho*@alto/15;
+}
+//esos valores los toma en el caso de que no le pase ningun valor
+//si le paso los valores por parametros los sobreescribe
+
+//puedo pasarle el nombre de los parametros en la llamada y alterar el orden
+article {
+  .miCalculo3(@alto: 2px, @ancho: 10px);
+  padding: @resultado;
+}
+
+//la variable @arguments tiene el valor de todos los parametros que se le pasan a la funcion
+.miCalculo4(@ancho: 10px, @alto: 2px)
+{
+  border: @arguments; //respeta el orden de la definicion y no el orden de la llamada
+  @resultado: @ancho*@alto/15;
+}
+article {
+  .miCalculo4(10px, 5px);
+  padding: @resultado;
+}
+
+//podemos ejecutar diferentes formatos y  operaciones de un mismo mixin en fcn del valor de una variable
+.formato(claro; @color){
+  background-color: lighten(@color, 10%);
+}
+.formato(oscuro; @color){
+  background-color: darken(@color, 10%);
+}
+//propiedades que siempre queremos incluir para este mixin
+
+.formato(@_; @color){
+  border-color: @color;
+}
+@miFormato: claro; //en fc del valor de algo que se calcula en mi css le puedo aplicar diferentes estilos a un monton de selectores
+//si le paso un valor que no esta declaro no incluye ni calro ni osccuro y solo llama a la propiedad comun
+p.especial{
+  .formato(@miFormato, #fc0);
+}
+
+
+//conjunto de reglas y mixin y less
+
+//reglas como  parametros en mixins
+.viejos-navegadores(@reglas){
+  html.old & { @reglas(); }
+}
+@misReglas:{
+    background-color: blue;
+};
+header {
+  //estilo comun
+  color: #333;
+  .viejos-navegadores(@misReglas);
+}
+
+footer {
+  //estilo comun
+  color: #333;
+  .viejos-navegadores({
+      border: 1px solid white;
+      background-color: red;
+  });
+}
+
+//mixins condicionales (Guards)
+.aplicarColorFondo(@color) when (iscolor(@color)=true){
+  background-color: @color;
+}
+
+.elemento1 {
+  text-align: left;
+  .aplicarColorFondo('hola');
+}
+
+.elemento2 {
+  text-align: left;
+  .aplicarColorFondo(#fc0);
+}
