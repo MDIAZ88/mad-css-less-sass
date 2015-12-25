@@ -27,7 +27,7 @@ module.exports = function(grunt) {
     sass: {
       dist:{
         options:{
-          style: 'expanded',
+          style: 'expanded', // values: nested, expanded, compact, compressed
           noCache: true
         },
         files:[{

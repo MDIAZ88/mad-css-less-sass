@@ -1,13 +1,16 @@
 //sass variable
 $base-font: 1em Courier, Helvetica, Arial, sans-serif;
 $base-color: #eee;
+
 * {
   box-sizing: border-box;
 }
+
 body {
   /*Sass variable result*/
   background-color: $base-color;
 }
+
 //Nested syntax
 /*Nested syntax result*/
 header {
@@ -23,6 +26,7 @@ header {
     font: $base-font;
   }
 }
+
 //Ancestor reference
 /*Ancestor reference result*/
 a {
@@ -32,6 +36,7 @@ a {
     text-decoration: underline;
   }
 }
+
 //Ancestor reference with subfix - create a variant with an selector created
 /*Ancestor reference with subfix result*/
 .button {
@@ -42,6 +47,7 @@ a {
     color: red;
   }
 }
+
 //Multiple nesting
 /*Multiple nesting Result*/
 .grandFatherClass {
@@ -58,6 +64,7 @@ a {
     }
   }
 }
+
 //Auto combination - all the posible combination with the three elements
 /*Auto combination Result*/
 div, p, span {
@@ -70,37 +77,39 @@ div, p, span {
 $div-name: test-img;
 $fsize: font-size;
 $fweight: font-weight;
+
 //list
 $myFonts: Helvetica, Arial, sans-serif;
+
 //Map
 $myMap: (red: #f00, blue: #00f, green: #0f0);
 
 //It didnt asign a value if the variable has not one
 $div-name: otro-test-img !default;
+
 //Variable Interpolation
 /*Variable Interpolation result*/
-##{$div-name}{
+##{$div-name} {
   height: 200px;
   color: #f00;
   #{$fsize}: 24px;
   #{$fweight}: bold;
   background-color: $base-color;
 }
-
-##{$div-name}-2{
+##{$div-name}-2 {
   color: #333;
   background-color: $base-color;
 }
 
 //Operations and Functions
 /*Operations and Functions result*/
-$width:100%;
+$width: 100%;
 $border-base: 1px;
 $border-extra: 3;
 $bg-middle: $base-color / 2;
 $bg-alternative: $base-color - #15a;
 
-.column-2{
+.column-2 {
   float: left;
   box-sizing: border-box;
   width: $width / 2;
@@ -108,8 +117,7 @@ $bg-alternative: $base-color - #15a;
   border: $border-base solid #333;
   background-color: $bg-alternative;
 }
-
-.column-4{
+.column-4 {
   float: left;
   box-sizing: border-box;
   width: $width / 4;
@@ -117,11 +125,177 @@ $bg-alternative: $base-color - #15a;
   border: $border-base solid #333;
   background-color: invert(saturate($bg-alternative, 40%));
 }
-
-.special-border{
+.special-border {
   border-width: $border-base + $border-extra;
 }
-
-.clearfix{
+.clearfix {
   clear: both;
+}
+
+//Extend
+/*Extend Result*/
+.selectorA {
+  color: red;
+}
+.selectorA:hover {
+  text-decoration: underline;
+}
+.selectorB {
+  @extend .selectorA;
+  font-size: 24px;
+}
+.selectorC {
+  @extend .selectorA;
+  @extend .selectorB;
+  color: white;
+  border: 1px solid #333;
+}
+.selectorD {
+  @extend .selectorA:hover;
+  @extend .selectorB;
+  color: red;
+  border: 2px solid #333;
+}
+
+//Import and Partials
+/*Import and Partials Result*/
+@import "base.css";
+@import "_partial";
+
+//I have access to the variables of the imprted files
+.base-partial {
+  color: $partial-color;
+}
+
+//Nested import
+/*Nested Import Result*/
+#main {
+  @import "base_sass.scss";
+}
+
+//Conditionals in Sass
+/*Conditional Result*/
+@if($partial-color == red) {
+  .mySelector {
+    text-align: center;
+  }
+}
+.myOtherSelector {
+  text-align: left;
+  @if(2>5) {
+    color: white;
+  }
+  @else if($partial-color == green) {
+    color: $partial-color;
+  }
+  @else {
+    color: yellow;
+  }
+}
+
+//Bucles and Iterations
+/*Bucles and Iterations Results*/
+@for $i from 1 through 3 {
+  .foritem-#{$i} {
+    width: 10px*$i;
+  }
+}
+
+$i: 2;
+@while $i <= 4 {
+  .whileitem-#{$i} {
+    width: 10px*$i;
+  }
+  $i: $i+1;
+}
+
+$baseImgPath: '../img/';
+@each $item in ok,
+error,
+alert {
+  .message-#{$item} {
+    background-image: url(#{$baseImgPath}bg/bg-#{$item}.png);
+  }
+}
+
+@each $key, $value in (h1: 3em, h2: 2em, h3: 1em) {
+  #{$key} {
+    font-size: $value;
+  }
+}
+
+@each $tag, $prop, $value in (h4, font-size, .8em), (h5, font-size, .5em) {
+  #{$tag} {
+    #{$prop}: $value;
+  }
+}
+
+//Mixins declaration
+@mixin special($color) {
+  font:{
+    size: 3px;
+    weight: bold;
+    family: Courier;
+  }
+  color: $color;
+}
+
+@mixin advise{
+  text-align: center;
+  background-color: #aaa;
+  &:hover{
+    background-color: #eee;
+  }
+}
+
+//Mixin group
+@mixin supermixiin($color){
+  @include advise;
+  @include special($color);
+}
+
+@mixin rounded($radius, $size: 1px, $args...){
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+    border-size: $size;
+    &:hover{
+      content: $args;
+    }
+}
+
+.advise-ok{
+  @include supermixiin(blue);
+}
+
+.advise-error{
+  @include rounded(5px, 2px, 'this is', 'other thing');
+}
+
+
+//reglas completas como parametros a mixins
+@mixin oldBrowser {
+    html.old & {
+      @content;
+    }
+}
+
+header{
+  //common styles
+  @include oldBrowser{
+    background-color: red;
+
+    .extra{
+      text-align: center;
+    }
+  };
+}
+
+footer{
+  //Common styles
+  color: #fc0;
+  @include oldBrowser{
+    border: 1px solid white;
+    background-color: red;
+  };
 }
