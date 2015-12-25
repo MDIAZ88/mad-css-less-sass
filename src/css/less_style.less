@@ -1,6 +1,8 @@
+
 /*CSS ONLY SUPPORTS MULTI-LINE COMMENTS*/
-//BUT LESS SUPPORTS ONE-LINE COMMENTS - THEY ARE NOT GOING TO BE PRESENT ON THE CSS FILE
+//LESS SUPPORTS ONE-LINE COMMENTS - THEY ARE NOT GOING TO BE PRESENT ON THE CSS FILE
 //LESS VARIABLE
+/*FIRST LESS VARIABLE DECLARATION RESULT*/
 @bg-base: #eee;
 @font-base: 1 em Helvetica, Arial, sans-serif;
 
@@ -13,6 +15,8 @@ body {
 }
 
 //LESS NESTING
+
+/*LESS NESTING RESULT*/
 header{
   padding: 10px;
   background-color: #333;
@@ -26,7 +30,7 @@ header{
     font: @font-base;
   }
 }
-
+//& - PREDECESOR REFERENCE
 a {
     color: red;
     text-decoration: none;
@@ -35,7 +39,8 @@ a {
       text-decoration: underline;
     }
 }
-// se sustituye el & por toda la jerarquia de antecesores
+// &  is replaced by the entire hierarchy of ancestors
+/* & RESULT*/
 .boton {
   &-ok {
     color: green;
@@ -46,38 +51,40 @@ a {
   }
 }
 
-.clasePadre {
-  .claseHija {
+.fatherClass {
+  .childClass {
     & > h1 {
       color: blue;
     }
   }
 }
 
-.calsePadre {
-  .claseHija {
-    .claseAbuelo & {
+.fatherClass {
+  .childClass {
+    .grandFatherClass & {
       color: red;
     }
   }
 }
-// APLICA LA REGLA DEL ANTECESOR A TODAS LAS COMBINACIONES POSIBLES DE ESTOS SELECTORES
+//Aply the & rule to all the possible combinations
+/* & + & RESULT*/
 div, p, span {
   & + & {
     color: white;
   }
 }
 
-//USO DE VARIABLES -  EXXPLICACION MAS PROFUNDA
+//VARIABLES - DEEP EXPLANATION
 
 @div-name: test-img;
 @fsize: font-size;
 @fweight: font-weight;
-@saludo: 'hola';
-@hola: 'hola LESS';
-//se pueden usar las variables para construir elementos
-//interpolacion de la variable
+@message: 'hello';
+@hello: 'Hello LESS';
+//WHE CAN USE VARIABLES TO BUILD ELEMENTS
+//VARIABLE INTERPOLATION
 
+/*VARIABLE INTERPOLATION RESULT*/
 #@{div-name} {
   @bg-base: #fc0;
   height: 200px;
@@ -92,38 +99,40 @@ div, p, span {
   color: #333;
   background-color: @bg-base;
 
+//@@VARIABLE IS A VARIABLE FROM A VARIABLE
   &:after{
-    content: @@saludo; //variables de variables
+    content: @@message;
   }
 }
-//ambito de las variables.
-//siempre  busca la variable en su regla si no la encuentra sube un nivel.
-//sigue subiendo hasta el final de la jerarquia da un error.
+//VARIABLE SCOPE.
+//FIRST IT SEARCH INTO HIS RULE IF IT DOESN'T FIND THE VARIABLE, IT UP A LEVEL .
+//IF IT CONTINUE SEARCHING IN ALL THE HIERARCHY AND DOESN'T FIND ANYTHING, SEND AN ERROR MESSAGE .
 
-//OPERACIONES Y FUNCIONES PREDEFINIDAS
+//DEFAULT FUNCTIONS AND OPERATIONS
 
-@ancho: 100%;
+/*LESS DEFAULT FUNCTIONS AND OPERATIONS RESULT*/
+@width: 100%;
 @border-base: 1px;
 @border-extra: 3;
-@bg-medio: @bg-base / 2;
-@bg-alternativo: @bg-base - #15a;
+@bg-middle: @bg-base / 2;
+@bg-alternative: @bg-base - #15a;
 
 .column-2 {
   float: left;
   box-sizing: border-box;
-  width: @ancho/2;
+  width: @width/2;
   padding: 10px;
   border: @border-base solid #3333;
-  background-color: @bg-alternativo;
+  background-color: @bg-alternative;
 }
 
 .column-4 {
   float: left;
   box-sizing: border-box;
-  width: @ancho/4;
+  width: @width/4;
   padding: 10px;
   border: @border-base solid #3333;
-  background-color: spin(saturate(@bg-alternativo,40%),10);
+  background-color: spin(saturate(@bg-alternative,40%),10);
 }
 
 .clearfix {
@@ -134,13 +143,13 @@ div, p, span {
   border-width: @border-base + @border-extra;
 }
 
-//extend
-//para vincular un estilo a otro
-//no se puede colocar otro pseudo selector como :hover detras de un extend
-//el extend siempre tiene que ser el ultimo pseudoselector
-//puedo concatenar extend, para extender de ms de un selectorA
-//esto depende de lo que queremos hacer
+//EXTEND
+//LINK AN STYLE WITH ANOTHERONE
+//WHE CAN'T USE A PSEUDO-SELECTOR LIKE  :hover BEHIND EXTEND
+//EXTEND HAS TO BE ALWAYS THE LAST PSEUDO-SELECTOR
+//WHE CAN CONCAT EXTEND
 
+/*LESS EXTEND RESULT*/
 .selectorA {
   color: #aaa;
 }
@@ -158,88 +167,91 @@ div, p, span {
   border: : 1px solid #fff;
 }
 
-// tiene que ser una coincidencia exacta
+// HAS TO BE A COINCIDENCE
 .selectorC:extend(.selectorA, .selectorB) {
   background-color: #fc0;
 }
-//en el caso de aplicar a todas las variantes de un selector
+//USE ALL TO APLY IT TO ALL SELECTOR VARIANTS
+/*LESS EXTEND ALL RESULT*/
 .selectorD:extend(.selectorA all, .selectorB) {
   background-color: #ccc;
 }
-//al igual qeu las variables se aplican en funcion de los ambitos
-//sentido en las meddias queries
-//no detectas duplicaciones
-//reultilizan codigo
-//que un selector se aproveche de las prop que ya tiene otro elemento
-
-//mixin reproducci un codigo en todos los selectores que lo utilizan
+//LIKE VARIABLES, EXTENDS APLY IN A SCOPE
+//GIVE SENCE WHEN WE USE MEDIA QUERIES
+//DOESN'T FIND DUPLICATIONS
+//IS BETTER FOR CODE REUSE
+//IT'S USED TO TAKE ADVANTAGE OF THE ANOTHER SELECTOR PROPERTIES
 
 //MERGE
-//es la capacidad de unir varios valores para una misma propiedad en un mismo selector
-@rutaBaseImg: '../img/';
+//IT IS THE CAPACITY TO JOIN DIFERENTS VALUES FOR THE SAME PROPERTY OF A SELECTOR
+/*LESS MERGE RESULT*/
+@routeBaseImg: '../img/';
 .alert {
-  background+:url('@{rutaBaseImg}bg/alternativo');
+  background+:url('@{routeBaseImg}bg/alternative');
   background-repeat+: no-repeat;
   background-position+: center;
 }
-//en css prevalece la segunda definicion del background por sobre la primera
-//el simbolo + le avisa a less que tiene que concatenar los valores para las propiedades
+// + MAKE AN ADVICE TO LESS THAT HE HAS TO CONCAT THE PROPERTY VALUES
 .alert-ok {
   //esto es lo mismo que poner
   //.alert;
-  background+:url('@{rutaBaseImg}bg/alternativo');
+  background+:url('@{routeBaseImg}bg/alternative');
   background-repeat+: no-repeat;
   background-position+: center;
 
-  background+:url('@{rutaBaseImg}bg/alternativo');
+  background+:url('@{routeBaseImg}bg/alternative');
   background-repeat+: no-repeat;
   background-position+: left top;
 }
 
 
 //IMPORT FILES
-@import "base.less";// coloca el selector al final
-.extendido:extend(.base){
+/*IMPORT RESULTS*/
+//SET THE IMPORT SELECTOR AT THE END
+@import "base.less";
+.extended:extend(.base){
   border: 1px solid #ccc;
 }
 
-//esto solo  esta pensado para .less y no para .css
+//THIS IS ONLY FOR .less FILES, NOT FOR .css FILES
+/*IMPORT (REFERENCE) RESULT*/
 @import (reference) "base.less";
-.extendido:extend(.base){
+.extended:extend(.base){
   border: 1px solid #ccc;
 }
 
-@import "base.css"; //coloca el import al principo del css
-@import (inline) "base.css"; //incluye el contenido del archivo
-//si se pone un inline en un archivo .less el contenido no se parsea y se coloca como esta
-@import (less) "base.css";
-//Fuerza a que se comporte como un archivo less por mas de que sea css
-//tb se puede hacer viceverza
-@import (once) "base.less";//fuerza a que se importe una sola vez el archivo
-@import (multiple) "base.less";//viceverza del anterior
+@import "base.css"; //THIS SETS THE SELECTOR AT THE BEGINING
+@import (inline) "base.css"; //INCCLUDES THE FILE CONTENT
+//IF THE INLE COMMAND IS USED IN A .less FILE, IT DOESN'T PARSE THE CODE
+@import (less) "base.css";//FORCE A .less FILE BEHAVIOR
+@import (css) "base.less";//FORCE A .css FILE BEHAVIOR
+@import (once) "base.less";//FORCE ONLY ONE FILE IMPORT
+@import (multiple) "base.less";//FORCE MULTIPLES FILE IMPORT
 
 
 //CONDITIONALS
-& when (@saludo = 'hola') {
-  .despedida {
+/*CONDITIONALS RESULT*/
+& when (@message = 'Hello') {
+  .farewell {
     color: white;
   }
 }
 
-& when ( isnumber(@saludo) = false) {
-  .despedida2 {
+& when ( isnumber(@message) = false) {
+  .farewell2 {
     color: blue;
   }
 }
 
 //LOOPS
-.bucle(@i) when (@i > 0) {
-  .bucle((@i - 1));
+/*LOOPS RESULT*/
+.loop(@i) when (@i > 0) {
+  .loop((@i - 1));
   width: (100px/@i);
 }
 
 section {
-  .bucle(3);
+  .loop(3);
 }
 
 .generate-columns(@n, @i:1) when (@i =< @n) {
@@ -251,131 +263,132 @@ section {
 .generate-columns(4);
 
 //MIXIN
-//conbinar propiedades de diferentes estilos
-
-//si queremos que la clase .aviso no aparesca en los resultados css
-//agregar ()
-.aviso() {
+//COMBINE DIFERENTS STYLE PROPERTIE
+//() DOESN'T SHOWS THE CLASS IN THE .css FILE
+/*MIXIN RESULT*/
+.alrt() {
   text-align: center;
   background-color: #aaa;
-  // a diferencia del extend
-  //los mixin admiten la referencia al padre
+  // IN MIXINS WHE CAN USE &
   &:hover {
     bacground-color: #eee;
   }
 }
-.aviso-ok {
-  .aviso();
+.alrt-ok {
+  .alrt();
   color: green;
 }
 
-.aviso-error {
-    .aviso(); //llamada en forma de funcion
+.alrt-error {
+    .alrt(); //WE CAN CALL THE MIXXIN LIKE A FUNCTION
     color: red;
 }
-//si existe una gran cantidad de codigo  que existe entre avisos  se puede extender o crear un mixin
 
-//mixin como funciones y con parametros
-.miCalculo()
+//MIXIN WITH FUNCTIONS AND PARAMETERS
+/*MIXIN WITH FUNCTIONS AND PARAMETERS RESULT*/
+.myCalc()
 {
-  @ancho: 10px;
-  @alto: 5px;
-  @resultado: @ancho*@alto/15;
+  @width: 10px;
+  @heigth: 5px;
+  @result: @width*@heigth/15;
 }
 
 article {
-  .miCalculo();
-  padding: @resultado;
+  .myCalc();
+  padding: @result;
 }
-//paso de parametros
-.miCalculo2(@ancho, @alto)
+//PARAMETERS
+
+.myCalc2(@width, @height)
 {
-  @resultado: @ancho*@alto/15;
+  @result: @width*@height/15;
 }
 
 article {
-  .miCalculo2(10px, 5px);
-  padding: @resultado;
+  .myCalc2(10px, 5px);
+  padding: @result;
 }
-//los parametros pueden tener valores por defectos
-.miCalculo3(@ancho: 10px, @alto: 2px)
+//WE CAN HAVE DEFAULT VALUES IN  PAREMETERS
+.myCalc3(@width: 10px, @height: 2px)
 {
-  @resultado: @ancho*@alto/15;
+  @result: @width*@height/15;
 }
-//esos valores los toma en el caso de que no le pase ningun valor
-//si le paso los valores por parametros los sobreescribe
+//THE DEFAULTS ARE USED ONLY WHEN WE DON'T SEND VALUES TO THE FUNCTION
+//IF WE SEND VALUES TO THE FUNCTION THEY ARE GOING TO OVERWRITE THE DEFAULT VALUES
 
-//puedo pasarle el nombre de los parametros en la llamada y alterar el orden
+//WE CAN ADD THE PARAMETER NAME IN THE FUNCTION CALL AND ALSO WE CAN CHANGE THE PARAMETERS ORDER
 article {
-  .miCalculo3(@alto: 2px, @ancho: 10px);
-  padding: @resultado;
+  .myCalc3(@width: 2px, @height: 10px);
+  padding: @result;
 }
 
-//la variable @arguments tiene el valor de todos los parametros que se le pasan a la funcion
-.miCalculo4(@ancho: 10px, @alto: 2px)
+//@arguments HAS ALL THE PARAMETER VALUES
+.myCalc4(@width: 10px, @height: 2px)
 {
-  border: @arguments; //respeta el orden de la definicion y no el orden de la llamada
-  @resultado: @ancho*@alto/15;
+  border: @arguments; //IT RESPECT THE FUNCTIOMN DEFINITION ORDEN - IT DOESN'T PAY ATTENTION TO THE FUNCTION CALL ORDER
+  @result: @width*@height/15;
 }
 article {
-  .miCalculo4(10px, 5px);
-  padding: @resultado;
+  .myCalc4(10px, 5px);
+  padding: @result;
 }
 
-//podemos ejecutar diferentes formatos y  operaciones de un mismo mixin en fcn del valor de una variable
-.formato(claro; @color){
+//WE CAN EXECUTE DIFERENTS FORMATS AND OPERATIONS FROM A SAME MIXIN WITH A VARIABLE VALUE
+/*FORMATS AND OPERATION RESULT*/
+.format(claro; @color){
   background-color: lighten(@color, 10%);
 }
-.formato(oscuro; @color){
+.format(oscuro; @color){
   background-color: darken(@color, 10%);
 }
-//propiedades que siempre queremos incluir para este mixin
 
-.formato(@_; @color){
+//PROPERTIES THAT WE ALWAYS WANT TO INCLUDE IN A MIXIN
+.format(@_; @color){
   border-color: @color;
 }
-@miFormato: claro; //en fc del valor de algo que se calcula en mi css le puedo aplicar diferentes estilos a un monton de selectores
-//si le paso un valor que no esta declaro no incluye ni calro ni osccuro y solo llama a la propiedad comun
+@myFormat: claro; //WE CAN APLY DIFERENT STYLES TO A LOT OF SELECTORS IN FUNCTION OF A CALCULATED VALUE
 p.especial{
-  .formato(@miFormato, #fc0);
+  .format(@myFormat, #fc0);
 }
 
+//RULES AND MIXINS IN LESS
 
-//conjunto de reglas y mixin y less
+//RULES LIKE PARAMETERS IN A MIXIN
 
-//reglas como  parametros en mixins
-.viejos-navegadores(@reglas){
-  html.old & { @reglas(); }
+/*RULES LIKE PARAMETERS IN A MIXIN RESULT*/
+.old-browsers(@rules){
+  html.old & { @rules(); }
 }
-@misReglas:{
+@myRules:{
     background-color: blue;
 };
 header {
-  //estilo comun
+  //COMON STYLE
   color: #333;
-  .viejos-navegadores(@misReglas);
+  .old-browsers(@myRules);
 }
 
 footer {
-  //estilo comun
+  //COMON STYLE
   color: #333;
-  .viejos-navegadores({
+  .old-browsers({
       border: 1px solid white;
       background-color: red;
   });
 }
 
-//mixins condicionales (Guards)
-.aplicarColorFondo(@color) when (iscolor(@color)=true){
+//MIXIN CONDITIONAL (Guards)
+/*MIXIN CONDITIONAL (GUARDS) RESULT*/
+.aplyColorBackground(@color) when (iscolor(@color)=true){
   background-color: @color;
 }
 
-.elemento1 {
+.element1 {
   text-align: left;
-  .aplicarColorFondo('hola');
+  .aplyColorBackground('Hello');
 }
 
-.elemento2 {
+.element2 {
   text-align: left;
-  .aplicarColorFondo(#fc0);
+  .aplyColorBackground(#fc0);
 }

@@ -1,0 +1,127 @@
+//sass variable
+$base-font: 1em Courier, Helvetica, Arial, sans-serif;
+$base-color: #eee;
+* {
+  box-sizing: border-box;
+}
+body {
+  /*Sass variable result*/
+  background-color: $base-color;
+}
+//Nested syntax
+/*Nested syntax result*/
+header {
+  padding: 10px;
+  background-color: #333;
+  //Direct son
+  > h1 {
+    background-color: $base-color;
+  }
+  //All p in the header
+  p {
+    color: #fff;
+    font: $base-font;
+  }
+}
+//Ancestor reference
+/*Ancestor reference result*/
+a {
+  color: red;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+//Ancestor reference with subfix - create a variant with an selector created
+/*Ancestor reference with subfix result*/
+.button {
+  &-OK {
+    color: green;
+  }
+  &-ERROR {
+    color: red;
+  }
+}
+//Multiple nesting
+/*Multiple nesting Result*/
+.grandFatherClass {
+  .fatherClass {
+    & > h1 {
+      color: white;
+    }
+  }
+}
+.grandFatherClass {
+  .fatherClass {
+    .sonClass & {
+      color: red;
+    }
+  }
+}
+//Auto combination - all the posible combination with the three elements
+/*Auto combination Result*/
+div, p, span {
+  & + & {
+    color: white;
+  }
+}
+
+//Variables and default values
+$div-name: test-img;
+$fsize: font-size;
+$fweight: font-weight;
+//list
+$myFonts: Helvetica, Arial, sans-serif;
+//Map
+$myMap: (red: #f00, blue: #00f, green: #0f0);
+
+//It didnt asign a value if the variable has not one
+$div-name: otro-test-img !default;
+//Variable Interpolation
+/*Variable Interpolation result*/
+##{$div-name}{
+  height: 200px;
+  color: #f00;
+  #{$fsize}: 24px;
+  #{$fweight}: bold;
+  background-color: $base-color;
+}
+
+##{$div-name}-2{
+  color: #333;
+  background-color: $base-color;
+}
+
+//Operations and Functions
+/*Operations and Functions result*/
+$width:100%;
+$border-base: 1px;
+$border-extra: 3;
+$bg-middle: $base-color / 2;
+$bg-alternative: $base-color - #15a;
+
+.column-2{
+  float: left;
+  box-sizing: border-box;
+  width: $width / 2;
+  padding: 10px;
+  border: $border-base solid #333;
+  background-color: $bg-alternative;
+}
+
+.column-4{
+  float: left;
+  box-sizing: border-box;
+  width: $width / 4;
+  padding: 10px;
+  border: $border-base solid #333;
+  background-color: invert(saturate($bg-alternative, 40%));
+}
+
+.special-border{
+  border-width: $border-base + $border-extra;
+}
+
+.clearfix{
+  clear: both;
+}

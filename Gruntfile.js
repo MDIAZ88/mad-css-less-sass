@@ -25,13 +25,19 @@ module.exports = function(grunt) {
       }
     },
     sass: {
-      files: [{
-        expand: true,
-        cwd: "src/css",
-        src: "*.scss",
-        ext: ".css",
-        dest: "dist/"
-      }]
+      dist:{
+        options:{
+          style: 'expanded',
+          noCache: true
+        },
+        files:[{
+          expand: true,
+          cwd: "src/css",
+          src: ["*.scss"],
+          dest: "src/css",
+          ext: ".css"
+        }]
+      }
     },
     watch: {
       options: {
