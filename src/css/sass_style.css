@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  /*Sass variable result*/
+  background-color: #eee;
+}
+
+/*Nested syntax result*/
+header {
+  padding: 10px;
+  background-color: #333;
+}
+header > h1 {
+  background-color: #eee;
+}
+header p {
+  color: #fff;
+  font: 1em Courier, Helvetica, Arial, sans-serif;
+}
+
+/*Ancestor reference result*/
+a {
+  color: red;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/*Ancestor reference with subfix result*/
+.button-OK {
+  color: green;
+}
+.button-ERROR {
+  color: red;
+}
+
+/*Multiple nesting Result*/
+.grandFatherClass .fatherClass > h1 {
+  color: white;
+}
+
+.sonClass .grandFatherClass .fatherClass {
+  color: red;
+}
+
+/*Auto combination Result*/
+div + div, p + div, span + div, div + p, p + p, span + p, div + span, p + span, span + span {
+  color: white;
+}
+
+#test-img {
+  height: 200px;
+  color: #f00;
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #eee;
+}
+
+#test-img-2 {
+  color: #333;
+  background-color: #eee;
+}
+
+.column-2 {
+  float: left;
+  box-sizing: border-box;
+  width: 50%;
+  padding: 10px;
+  border: 1px solid #333;
+  background-color: #dd9944;
+}
+
+.column-4 {
+  float: left;
+  box-sizing: border-box;
+  width: 25%;
+  padding: 10px;
+  border: 1px solid #333;
+  background-color: #0062dd;
+}
+
+.special-border {
+  border-width: 4px;
+}
+
+.clearfix {
+  clear: both;
+}
+
+/*# sourceMappingURL=sass_style.css.map */

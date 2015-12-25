@@ -1,11 +1,14 @@
 @import "base.css";
+@import "base.less";
 /*CSS ONLY SUPPORTS MULTI-LINE COMMENTS*/
+/*FIRST LESS VARIABLE DECLARATION RESULT*/
 * {
   box-sizing: border-box;
 }
 body {
   background-color: #eeeeee;
 }
+/*LESS NESTING RESULT*/
 header {
   padding: 10px;
   background-color: #333;
@@ -24,18 +27,20 @@ a {
 a:hover {
   text-decoration: underline;
 }
+/* & RESULT*/
 .boton-ok {
   color: green;
 }
 .boton-error {
   color: red;
 }
-.clasePadre .claseHija > h1 {
+.fatherClass .childClass > h1 {
   color: blue;
 }
-.claseAbuelo .calsePadre .claseHija {
+.grandFatherClass .fatherClass .childClass {
   color: red;
 }
+/* & + & RESULT*/
 div + div,
 div + p,
 div + span,
@@ -47,6 +52,7 @@ span + p,
 span + span {
   color: white;
 }
+/*VARIABLE INTERPOLATION RESULT*/
 #test-img {
   height: 200px;
   color: #ff;
@@ -59,8 +65,9 @@ span + span {
   background-color: #eeeeee;
 }
 #test-img-2:after {
-  content: 'hola LESS';
+  content: 'Hello LESS';
 }
+/*LESS DEFAULT FUNCTIONS AND OPERATIONS RESULT*/
 .column-2 {
   float: left;
   box-sizing: border-box;
@@ -83,6 +90,7 @@ span + span {
 .special-column {
   border-width: 4px;
 }
+/*LESS EXTEND RESULT*/
 .selectorA,
 .selectorC,
 .selectorD {
@@ -104,28 +112,32 @@ span + span {
 .selectorC {
   background-color: #fc0;
 }
+/*LESS EXTEND ALL RESULT*/
 .selectorD {
   background-color: #ccc;
 }
+/*LESS MERGE RESULT*/
 .alert {
-  background: url('../img/bg/alternativo');
+  background: url('../img/bg/alternative');
   background-repeat: no-repeat;
   background-position: center;
 }
 .alert-ok {
-  background: url('../img/bg/alternativo'), url('../img/bg/alternativo');
+  background: url('../img/bg/alternative'), url('../img/bg/alternative');
   background-repeat: no-repeat, no-repeat;
   background-position: center, left top;
 }
+/*IMPORT RESULTS*/
 .base,
-.extendido,
-.extendido {
+.extended,
+.extended {
   color: red;
 }
-.extendido {
+.extended {
   border: 1px solid #ccc;
 }
-.extendido {
+/*IMPORT (REFERENCE) RESULT*/
+.extended {
   border: 1px solid #ccc;
 }
 .base {
@@ -133,16 +145,15 @@ span + span {
 }
 
 .base,
-.extendido,
-.extendido {
+.extended,
+.extended {
   color: red;
 }
-.despedida {
-  color: white;
-}
-.despedida2 {
+/*CONDITIONALS RESULT*/
+.farewell2 {
   color: blue;
 }
+/*LOOPS RESULT*/
 section {
   width: 100px;
   width: 50px;
@@ -159,4 +170,62 @@ section {
 }
 .col-4 {
   width: 100%;
+}
+/*MIXIN RESULT*/
+.alrt-ok {
+  text-align: center;
+  background-color: #aaa;
+  color: green;
+}
+.alrt-ok:hover {
+  bacground-color: #eee;
+}
+.alrt-error {
+  text-align: center;
+  background-color: #aaa;
+  color: red;
+}
+.alrt-error:hover {
+  bacground-color: #eee;
+}
+/*MIXIN WITH FUNCTIONS AND PARAMETERS RESULT*/
+article {
+  padding: 3.33333333px;
+}
+article {
+  padding: 3.33333333px;
+}
+article {
+  padding: 1.33333333px;
+}
+article {
+  border: 10px 5px;
+  padding: 3.33333333px;
+}
+/*FORMATS AND OPERATION RESULT*/
+p.especial {
+  background-color: #ffd633;
+  border-color: #ffcc00;
+}
+/*RULES LIKE PARAMETERS IN A MIXIN RESULT*/
+header {
+  color: #333;
+}
+html.old header {
+  background-color: blue;
+}
+footer {
+  color: #333;
+}
+html.old footer {
+  border: 1px solid white;
+  background-color: red;
+}
+/*MIXIN CONDITIONAL (GUARDS) RESULT*/
+.element1 {
+  text-align: left;
+}
+.element2 {
+  text-align: left;
+  background-color: #ffcc00;
 }
