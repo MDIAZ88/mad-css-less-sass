@@ -1,3 +1,4 @@
+@import url(base.css);
 * {
   box-sizing: border-box;
 }
@@ -51,6 +52,7 @@ div + div, p + div, span + div, div + p, p + p, span + p, div + span, p + span, 
   color: white;
 }
 
+/*Variable Interpolation result*/
 #test-img {
   height: 200px;
   color: #f00;
@@ -64,6 +66,7 @@ div + div, p + div, span + div, div + p, p + p, span + p, div + span, p + span, 
   background-color: #eee;
 }
 
+/*Operations and Functions result*/
 .column-2 {
   float: left;
   box-sizing: border-box;
@@ -88,6 +91,150 @@ div + div, p + div, span + div, div + p, p + p, span + p, div + span, p + span, 
 
 .clearfix {
   clear: both;
+}
+
+/*Extend Result*/
+.selectorA, .selectorB, .selectorC, .selectorD {
+  color: red;
+}
+
+.selectorA:hover, .selectorB:hover, .selectorC:hover, .selectorD {
+  text-decoration: underline;
+}
+
+.selectorB, .selectorC, .selectorD {
+  font-size: 24px;
+}
+
+.selectorC {
+  color: white;
+  border: 1px solid #333;
+}
+
+.selectorD {
+  color: red;
+  border: 2px solid #333;
+}
+
+/*Import and Partials Result*/
+.partial-base {
+  color: red;
+}
+
+.base-partial {
+  color: red;
+}
+
+/*Nested Import Result*/
+#main .base {
+  color: blue;
+}
+#main .base-2 {
+  text-align: center;
+}
+
+/*Conditional Result*/
+.mySelector {
+  text-align: center;
+}
+
+.myOtherSelector {
+  text-align: left;
+  color: yellow;
+}
+
+/*Bucles and Iterations Results*/
+.foritem-1 {
+  width: 10px;
+}
+
+.foritem-2 {
+  width: 20px;
+}
+
+.foritem-3 {
+  width: 30px;
+}
+
+.whileitem-2 {
+  width: 20px;
+}
+
+.whileitem-3 {
+  width: 30px;
+}
+
+.whileitem-4 {
+  width: 40px;
+}
+
+.message-ok {
+  background-image: url(../img/bg/bg-ok.png);
+}
+
+.message-error {
+  background-image: url(../img/bg/bg-error.png);
+}
+
+.message-alert {
+  background-image: url(../img/bg/bg-alert.png);
+}
+
+h1 {
+  font-size: 3em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1em;
+}
+
+h4 {
+  font-size: 0.8em;
+}
+
+h5 {
+  font-size: 0.5em;
+}
+
+.advise-ok {
+  text-align: center;
+  background-color: #aaa;
+  font-size: 3px;
+  font-weight: bold;
+  font-family: Courier;
+  color: blue;
+}
+.advise-ok:hover {
+  background-color: #eee;
+}
+
+.advise-error {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border-size: 2px;
+}
+.advise-error:hover {
+  content: "this is", "other thing";
+}
+
+html.old header {
+  background-color: red;
+}
+html.old header .extra {
+  text-align: center;
+}
+
+footer {
+  color: #fc0;
+}
+html.old footer {
+  border: 1px solid white;
+  background-color: red;
 }
 
 /*# sourceMappingURL=sass_style.css.map */
