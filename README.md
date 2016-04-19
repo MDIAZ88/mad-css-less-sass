@@ -1,36 +1,75 @@
 #CSS-LESS-SASS
-1.css
-<br></br>
-2.less
-<br></br>
-3.sass
-<br></br>
-4.practice
-<br></br>
-
 
 ####CSS
 
 ###### Selectors
 
 * Universal Selector
-<br></br>
-<style>
-* {
-<br></br>  
- color: green;<br></br>
- font-size: 20px;<br></br>
- line-height: 25px;<br></br>
-}
-<br></br>
-</style>
+
+    <style>
+      * {
+
+      }
+    </style>
 * Element type Selector
+
+    <style>
+      ul {
+
+      }
+    </style>
 * ID Selector
+
+    <style>
+      #container {
+
+      }
+    </style>
 * Class Selector
+    <style>
+      .box {
+
+      }
+    </style>
 * Descendant Combinator
+    <style>
+      #container .box {
+
+      }
+    </style>
 * Child Combinator
+    <style>
+      #container > .box {
+
+      }
+    </style>
 * General Sibling Combinator
+    <style>
+      h2 ~ p {
+
+      }
+    </style>
 * Adjacent Sibling Combinator
+    <style>
+      h2 + p {
+
+      }
+    </style>
 * Attribute Selector
+    <style>
+      input[type="text"] {
+
+      }
+    </style>
 * Pseudo-class
+    <style>
+      a:hover {
+
+      }
+    </style>
 * Pseudo-element
+    <style>
+      .container:before {
+
+      }
+    </style>
