@@ -4,7 +4,7 @@
 
 ###### Selectors
 
-* Universal Selector
+* **Universal Selector**
 
   <dl>
       <dd>* {</dd>
@@ -15,7 +15,7 @@
   </dl>
 
 
-* Element type Selector
+* **Element type Selector**
 
   <dl>
       <dd>p {</dd>
@@ -23,7 +23,7 @@
       <dd>}</dd>
   </dl>
 
-* ID Selector
+* **ID Selector**
 
   <dl>
       <dd>#container {</dd>
@@ -32,7 +32,7 @@
       <dd>}</dd>
   </dl>
 
-* Class Selector
+* **Class Selector**
 
   <dl>
       <dd>.box {</dd>
@@ -42,7 +42,7 @@
       <dd>}</dd>
   </dl>
 
-* Descendant Combinator
+* **Descendant Combinator**
 
   <dl>
       <dd>#container .box {</dd>
@@ -50,7 +50,7 @@
       <dd>}</dd>
   </dl>
 
-* Child Combinator
+* **Child Combinator**
 
   <dl>
       <dd>#container > .box {</dd>
@@ -58,7 +58,7 @@
       <dd>}</dd>
   </dl>
 
-* General Sibling Combinator
+* **General Sibling Combinator**
 
   <dl>
       <dd>h2 ~ p {</dd>
@@ -66,7 +66,7 @@
       <dd>}</dd>
   </dl>
 
-* Adjacent Sibling Combinator
+* **Adjacent Sibling Combinator**
 
   <dl>
       <dd>p + p {</dd>
@@ -74,7 +74,7 @@
       <dd>}</dd>
   </dl>
 
-* Attribute Selector
+* **Attribute Selector**
 
   <dl>
       <dd>input[type] {</dd>
@@ -82,7 +82,7 @@
       <dd>}</dd>
   </dl>
 
-* Pseudo-class
+* **Pseudo-class**
 
   <dl>
       <dd>a:hover {</dd>
@@ -90,7 +90,7 @@
       <dd>}</dd>
   </dl>
 
-* Pseudo-element
+* **Pseudo-element**
 
   <dl>
       <dd>.container:before {</dd>
