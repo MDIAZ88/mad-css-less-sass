@@ -8,86 +8,92 @@
 
   <dl>
     <dd>* {</dd>
-
+    <dd> color: green;</dd>
+    <dd> font-size: 20px;</dd>
+    <dd> line-height: 25px;</dd>
     <dd>}</dd>
   </dl>
 
 
 * Element type Selector
 
-    <style>
-      ul {
+  <dl>
+    <dd>p {</dd>
+    <dd> font-size: 20px;</dd>
+    <dd>}</dd>
+  </dl>
 
-      }
-    </style>
 * ID Selector
 
-    <style>
-      #container {
-
-      }
-    </style>
+<dl>
+  <dd>#container {</dd>
+  <dd> width: 960px;</dd>
+  <dd>  margin: 0 auto;</dd>
+  <dd>}</dd>
+</dl>
 
 * Class Selector
 
-    <style>
-      .box {
-
-      }
-    </style>
+<dl>
+  <dd>.box {</dd>
+  <dd> padding: 20px;</dd>
+  <dd> margin: 10px;</dd>
+  <dd> width: 240px;</dd>
+  <dd>}</dd>
+</dl>
 
 * Descendant Combinator
 
-    <style>
-      #container .box {
-
-      }
-    </style>
+<dl>
+  <dd>#container .box {</dd>
+  <dd> padding: 20px;</dd>
+  <dd>}</dd>
+</dl>
 
 * Child Combinator
 
-    <style>
-      #container > .box {
-
-      }
-    </style>
+<dl>
+  <dd>#container > .box {</dd>
+  <dd> float: left;</dd>
+  <dd>}</dd>
+</dl>
 
 * General Sibling Combinator
 
-    <style>
-      h2 ~ p {
-
-      }
-    </style>
+<dl>
+  <dd>h2 ~ p {</dd>
+  <dd> margin-bottom: 20px;</dd>
+  <dd>}</dd>
+</dl>
 
 * Adjacent Sibling Combinator
 
-    <style>
-      h2 + p {
-
-      }
-    </style>
+<dl>
+  <dd>p + p {</dd>
+  <dd> margin-bottom: 20px;</dd>
+  <dd>}</dd>
+</dl>
 
 * Attribute Selector
 
-    <style>
-      input[type="text"] {
-
-      }
-    </style>
+<dl>
+  <dd>input[type] {</dd>
+  <dd> width: 200px;</dd>
+  <dd>}</dd>
+</dl>
 
 * Pseudo-class
 
-    <style>
-      a:hover {
-
-      }
-    </style>
+<dl>
+  <dd>a:hover {</dd>
+  <dd> color: red;</dd>
+  <dd>}</dd>
+</dl>
 
 * Pseudo-element
 
-    <style>
-      .container:before {
-
-      }
-    </style>
+<dl>
+  <dd>.container:before {</dd>
+  <dd> width: 200px;</dd>
+  <dd>}</dd>
+</dl>
