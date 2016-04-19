@@ -6,6 +6,10 @@
 
 * **Universal Selector**
 
+>The universal selector works selecting all elements on a page. Every HTML
+page is built on content placed within HTML tags. Each set of tags represents
+an element on the page.
+
   <dl>
       <dd>* {</dd>
       <dd> color: green;</dd>
@@ -17,6 +21,8 @@
 
 * **Element type Selector**
 
+>this selector must match one or more HTML elements of the same name.
+
   <dl>
       <dd>p {</dd>
       <dd> font-size: 20px;</dd>
@@ -24,6 +30,9 @@
   </dl>
 
 * **ID Selector**
+
+>This selector matches any HTML element that has an ID attribute with the same
+ value as that of the selector.
 
   <dl>
       <dd>#container {</dd>
@@ -34,6 +43,9 @@
 
 * **Class Selector**
 
+>The class selector also matches all elements on the page that have their class
+attribute set to the same value as the class.
+
   <dl>
       <dd>.box {</dd>
       <dd> padding: 20px;</dd>
@@ -43,6 +55,12 @@
   </dl>
 
 * **Descendant Combinator**
+
+>The descendant selector or, more accurately, the descendant
+combinator lets you combine two or more selectors so you can be more
+specific in your selection method.
+This declaration block will apply to all elements that have a class of box that
+ are inside an element with an ID of container.
 
   <dl>
       <dd>#container .box {</dd>
