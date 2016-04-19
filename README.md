@@ -6,7 +6,12 @@
 
 * Universal Selector
 
-  >  * *{*  *}* </style>
+  <dl>
+    <dd>* {</dd>
+
+    <dd>}</dd>
+  </dl>
+
 
 * Element type Selector
 
